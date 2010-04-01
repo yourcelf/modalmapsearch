@@ -1,0 +1,23 @@
+.modalmapsearch a img {
+  border: none;
+}
+.modalmapsearch .marker-image {
+  float: left;
+  margin-right: 0.5em;
+}
+.modalmapsearch .result {
+  margin-bottom: 1em;
+  float: left;
+  clear: both;
+  width: 300px;
+  display: block;
+}
+.modalmapsearch .searchform {
+  margin-bottom: 0.5em;
+}
+.modalmapsearch .paginator {
+  position: absolute;
+  bottom: 1em;
+  right: 40%;
+  display: inline;
+}
