@@ -66,12 +66,8 @@
                         $("#id_location").val("POINT(" + r.lng + " " + r.lat + ")");
                         map.initWKT();
                         map.initCenter();
+                        map.zoomTo(12);
                     }
-
-                    map.initWKT();
-                    map.initCenter();
-                    map.zoomTo(12);
-                    
                 }
             });
         </script>
