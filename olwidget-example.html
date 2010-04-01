@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Modal Map Search + olwidget</title>
+
+        <!-- openlayers, openstreetmap -->
+        <script src='http://openlayers.org/api/2.8/OpenLayers.js' type='text/javascript'></script>
+        <script src='http://openstreetmap.org/openlayers/OpenStreetMap.js' type='text/javascript'></script>
+        <!-- parts for olwidget.  Please download and host yourself;
+             these are not stable hosting locations. -->
+        <script src="http://olwidget.org/olwidget/js/olwidget.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="http://olwidget.org/olwidget/css/olwidget.css" type="text/css" />
+
+        <!-- parts for modalmapsearch -->
+        <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="css/modalmapsearch.css" />
+        <!-- API key for localhost:8080 -->
+        <script src="http://www.google.com/jsapi?key=ABQIAAAARaukg-vCnyMKCmf7W1mdOhTwM0brOpm-All5BF6PoaKBxRWWERTamCoQVTsBud1gQIJySWgIjf6_eg" type="text/javascript"></script>
+        <script type="text/javascript">//<![CDATA[
+            google.load('search', 1);
+            google.load('jquery', 1);
+            google.load('jqueryui', 1);
+        //]]></script>
+        <script src="js/modalmapsearch.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <p>An example showing the use of ModalMapSearch with <a href='http://olwidget.org'>olwidget</a>.</p>
+        <a href="" onclick="mms.open('Vegan Cookies near George, IA'); return false;">open search dialog</a>
+        <form method='post' action=''>
+            <textarea id='id_location' name='location'></textarea>
+            <table>
+                <tr>
+                    <td><label for='id_name'>Name</label></td>
+                    <td><input id='id_name' name='name' /></td>
+                </tr>
+                <tr>
+                    <td><label for='id_address'>Address</label></td>
+                    <td><input id='id_address' name='address' /></td>
+                </tr>
+                <tr>
+                    <td><label for='id_phone'>Phone</label></td>
+                    <td><input id='id_phone' name='phone' /></td>
+                </tr>
+            </table>
+        </form>
+        <style type='text/css'>
+            .ui-dialog {
+                z-index: 10000 !important;
+            }
+        </style>
+        <script type="text/javascript">
+            var map = new olwidget.EditableMap('id_location');
+            var mms = new ModalMapSearch({
+                callback: function(r) {
+                    if (r.titleNoFormatting) {
+                        $("#id_name").val(r.titleNoFormatting);
+                    }
+                    if (r.addressLines) {
+                        $("#id_address").val(r.addressLines.join(", "))
+                    }
+                    if (r.phoneNumbers && r.phoneNumbers[0]) {
+                        $("#id_phone").val(r.phoneNumbers[0].number);
+                    }
+                    if (r.lat && r.lng) {
+                        $("#id_location").val("POINT(" + r.lng + " " + r.lat + ")");
+                        map.initWKT();
+                        map.initCenter();
+                    }
+
+                    map.initWKT();
+                    map.initCenter();
+                    map.zoomTo(12);
+                    
+                }
+            });
+        </script>
+    </body>
+</html>
