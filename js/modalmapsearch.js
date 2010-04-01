@@ -4,7 +4,7 @@
 
 (function() {
     
-var modalmapsearch = function(options) {
+var ModalMapSearch = function(options) {
     if (options === undefined) { options = {}; }
 
     var defaults = {
@@ -202,5 +202,5 @@ var modalmapsearch = function(options) {
     this.div = div;
 }
 
-window.modalmapsearch = modalmapsearch;
+window.ModalMapSearch = ModalMapSearch;
 })();

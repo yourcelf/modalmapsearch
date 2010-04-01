@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" media="all" href="css/modalmapsearch.css" />
         <title>Modal Map Search test</title>
+
         <!-- API key for localhost:8080 -->
         <script src="http://www.google.com/jsapi?key=ABQIAAAARaukg-vCnyMKCmf7W1mdOhTwM0brOpm-All5BF6PoaKBxRWWERTamCoQVTsBud1gQIJySWgIjf6_eg" type="text/javascript"></script>
         <script type="text/javascript">//<![CDATA[
@@ -16,10 +17,16 @@
         <script src="js/modalmapsearch.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="container"></div>
         <script type="text/javascript">
-            var mms = new modalmapsearch();
-            mms.open("good times near winnipeg, ontario");
+            var mms = new ModalMapSearch({
+                callback: function(result) {
+                    $("#container").html("<h1>You Chose:</h1>" + result.titleNoFormatting + "<br />" +
+                        result.addressLines.join("<br />"));
+                }
+            });
         </script>
+        <p><a href='#' onclick="mms.open('beer near winnipeg')">show map search</a></p>
+        <div id="container"></div>
+
     </body>
 </html>
